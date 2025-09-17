@@ -19,5 +19,5 @@ export const updateProject = (id, payload) =>
 //Delete a project by ID
 export const deleteProject = (id) => api.delete(`/projects/${id}`);
 
-//Export the api instance as default for direct use if needed
+//export the api instance as default for direct use if needed
 export default api;
