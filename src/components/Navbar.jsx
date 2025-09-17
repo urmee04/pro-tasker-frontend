@@ -56,9 +56,14 @@ export default function Navbar() {
           </>
         ) : (
           //display when user is not logged in
-          <Button color="inherit" onClick={() => navigate("/login")}>
-            Login
-          </Button>
+          <>
+            <Button color="inherit" onClick={() => navigate("/login")}>
+              Login
+            </Button>
+            <Button color="inherit" onClick={() => navigate("/signup")}>
+              Signup
+            </Button>
+          </>
         )}
       </Toolbar>
     </AppBar>
