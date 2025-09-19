@@ -29,16 +29,22 @@ export default function Navbar() {
       {/* Container for navbar content with built-in padding and spacing */}
       <Toolbar>
         {/* Box container that grows to push other elements to the right */}
-        <Box sx={{ flexGrow: 1 }}>
+        <Box sx={{ display: "flex", alignItems: "center", flexGrow: 1 }}>
           {/* Application brand/logo text that is clickable */}
           <Typography
             variant="h6"
             component="div"
-            sx={{ cursor: "pointer" }}
+            sx={{ cursor: "pointer", mr: 2 }}
             onClick={() => navigate("/dashboard")} //navigate to dashboard on click
           >
-            Taskmaster
+            ProTasker
           </Typography>
+          {/* Always show Projects tab if logged in */}
+          {user && (
+            <Button color="inherit" onClick={() => navigate("/dashboard")}>
+              Projects
+            </Button>
+          )}
         </Box>
 
         {/* Conditional rendering based on user authentication status */}
