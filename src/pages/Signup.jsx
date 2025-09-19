@@ -9,8 +9,6 @@ import {
   Box,
   Alert,
 } from "@mui/material";
-//import API instance for making HTTP requests
-import { api } from "../api/axios";
 //import authentication context for user state management
 import { AuthContext } from "../context/AuthContext";
 //import navigation hook for programmatic routing
@@ -27,8 +25,8 @@ const Signup = () => {
   //state for storing and displaying error messages
   const [error, setError] = useState("");
 
-  //access setUser function from authentication context
-  const { setUser } = useContext(AuthContext);
+  //access signup function from authentication context
+  const { signup } = useContext(AuthContext);
 
   //initialize navigate function for programmatic page navigation
   const navigate = useNavigate();
@@ -44,17 +42,11 @@ const Signup = () => {
     setError(""); //clear any previous errors
 
     try {
-      //make POST request to signup API endpoint
-      const response = await api.post("/users/signup", formData);
-
-      //extract token and user data from response
-      const { token, user } = response.data;
+      //make signup request using context function
+      const { token, user } = await signup(formData);
 
       //save authentication token to browser's localStorage
       localStorage.setItem("token", token);
-
-      //update user state in context (authentication state)
-      setUser(user);
 
       //redirect user to dashboard after successful registration
       navigate("/dashboard");
