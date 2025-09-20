@@ -38,12 +38,21 @@ export const AuthProvider = ({ children }) => {
   };
 
   //signup function; handles new user registration
+  //signup function; handles new user registration
   const signup = async (data) => {
     setLoading(true); //start loading
     try {
       const res = await registerUser(data); //API call to register
+      const { token, user } = res.data; //extract token and user data
+
+      //store authentication data in localStorage
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
+
+      setUser(user); //update user state so app knows you're logged in
+
       setLoading(false); //stop loading
-      return res.data; //return response data
+      return res.data; //return response data (used in Signup.js)
     } catch (err) {
       setLoading(false); //stop loading on error
       throw err; //re-throw error for handling in components
